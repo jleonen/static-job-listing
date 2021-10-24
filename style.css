@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700&family=Lexend+Deca&family=Poppins:wght@400;500;600;700&family=Spartan:wght@500;700&display=swap");
+
+body {
+  font-family: "Spartan";
+}
+
+.attribution {
+  font-size: 11px;
+  text-align: center;
+}
+.attribution a {
+  color: hsl(228, 45%, 44%);
+}
+
+.header {
+  background-image: url("images/bg-header-desktop.svg");
+  background-size: cover;
+  background-color: hsl(180, 29%, 50%);
+  height: 100px;
+}
+
+.job-listing {
+  display: flex;
+  justify-content: space-around;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.562);
+}
+
+.job-listing img {
+  border-radius: 50%;
+}
+
+.job-info {
+  display: flex;
+  gap: 20px;
+  border-left: 5px solid hsl(180, 29%, 50%);
+}
+
+.job-description span {
+  font-size: 12px;
+}
+
+.new,
+.featured {
+  background-color: hsl(180, 37%, 55%);
+  color: white;
+  padding: 2px;
+  font-size: 14px;
+  border-radius: 30%;
+}
+
+.featured {
+  background-color: hsl(180, 14%, 20%);
+}
+
+.company,
+.tags {
+  color: hsl(180, 37%, 55%);
+}
+
+.company-img {
+  margin-left: 20px;
+}
+
+.tags {
+  align-self: center;
+}
+
+.tags span {
+  padding: 3px;
+  background-color: hsl(180, 31%, 95%);
+}
+
+.extra-info {
+  color: grey;
+  display: flex;
+  gap: 10px;
+}
