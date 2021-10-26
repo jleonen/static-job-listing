@@ -6,6 +6,8 @@ const filterBox = document.querySelector(".filter-section");
 const filterTags = document.querySelectorAll(".filter-tags");
 const clearBtn = document.querySelector(".clear-filters");
 
+let currentFilters = ["Frontend", "CSS", "Javascript"];
+
 //Language filters
 let languageList = [];
 for (const [key, value] of Object.entries(data)) {
@@ -14,8 +16,9 @@ for (const [key, value] of Object.entries(data)) {
   });
 }
 
-const languageFilters = new Set(languageList);
+const languageFilters = [...new Set(languageList)];
 console.log(languageFilters);
+const languageFilterTest = [...languageFilters];
 
 //tool filters
 let toolsList = [];
@@ -25,27 +28,100 @@ for (const [key, value] of Object.entries(data)) {
   });
 }
 
-const toolsFilters = new Set(toolsList);
+const toolsFilters = [...new Set(toolsList)];
 console.log(toolsFilters);
 
+//role filters
 let roleList = [];
 for (const [key, value] of Object.entries(data)) {
   roleList.push(value.role);
 }
 
-const roleFilters = new Set(roleList);
+const roleFilters = [...new Set(roleList)];
 console.log(roleFilters);
 
+//level filters
 let levelList = [];
 for (const [key, value] of Object.entries(data)) {
   levelList.push(value.level);
 }
 
-const levelFilters = new Set(levelList);
+const levelFilters = [...new Set(levelList)];
 console.log(levelFilters);
 
-data.forEach(function (job) {
-  let html = `
+console.log(currentFilters.includes("HTML"));
+
+let currentJobs;
+const renderData = function () {
+  currentJobs = data;
+  //////////////////filters/////////
+  // if (currentFilters.includes(...languageFilters)) {
+  //   const currentLanguage = currentFilters.filter((language) =>
+  //     language.includes(...["HTML", "CSS"])
+  //   );
+  //   console.log(currentLanguage);
+  //   currentJobs = data.filter((languageList) => {
+  //     languageList.languages.includes(currentLanguage);
+  //   });
+  // } else {
+  //   currentJobs;
+  // }
+  // console.log(currentJobs);
+  // const filters = ["HTML", "JavaScript"];
+  let currentLanguageFilters = [];
+  const currentFiltersTags = (list, filterList) => {
+    return filterList.filter((tag) =>
+      list.some((filter) => tag.includes(filter))
+    );
+  };
+
+  currentLanguageFilters = currentFiltersTags(currentFilters, languageFilters);
+  console.log(currentLanguageFilters);
+
+  //LANGUAGE FILTER
+  const filterByLanguage = (list, filters) => {
+    return list.filter((person) =>
+      filters.every((filter) => person.languages.includes(filter))
+    );
+  };
+
+  // console.log( filterByLanguage(data, ['JavaScript'] ) )
+  currentLanguageFilters.length > 0
+    ? (currentJobs = filterByLanguage(data, currentLanguageFilters))
+    : currentJobs;
+
+  //TOOL FILTER
+  const currentToolTags = currentFiltersTags(currentFilters, toolsFilters);
+  console.log(currentToolTags);
+
+  const filterByTools = (list, filters) => {
+    return list.filter(
+      (person) => filters.every((filter) => person.tools.includes(filter))
+      // filters.every((filter) => person.includes(filter))
+    );
+  };
+
+  currentToolTags.length > 0
+    ? (currentJobs = filterByTools(currentJobs, currentToolTags))
+    : currentJobs;
+
+  //ROLE FILTER
+  const filterByRole = (list, filters) => {
+    return list.filter(
+      (person) => filters.every((filter) => person.role.includes(filter))
+      // filters.every((filter) => person.includes(filter))
+    );
+  };
+
+  const currentRoleFilters = currentFiltersTags(currentFilters, roleFilters);
+
+  currentRoleFilters.length > 0
+    ? (currentJobs = filterByRole(currentJobs, currentRoleFilters))
+    : currentJobs;
+  ///////////////////////////////////////
+  currentJobs.forEach(function (job) {
+    console.log(job);
+    let html = `
     <div class="job-listing">
     <div class="job-info">
       <div class="company-img">
@@ -108,12 +184,14 @@ data.forEach(function (job) {
 
   </div>`;
 
-  container.insertAdjacentHTML("beforeend", html);
-});
+    container.insertAdjacentHTML("beforeend", html);
+  });
+};
+
+renderData();
 
 console.log(data[9].languages.join(","));
 
-let currentFilters = [];
 const tagHunt = function (value) {
   // console.log(value.innerHTML);
   if (currentFilters.includes(value.innerHTML)) {
