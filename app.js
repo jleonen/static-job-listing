@@ -1,6 +1,8 @@
 "use strict";
 const container = document.querySelector(".job-container");
 // import data from ".data.json";
+const filters = document.querySelector(".filter-items");
+const filterBox = document.querySelector(".filter-section");
 
 const data = [
   {
@@ -181,21 +183,40 @@ data.forEach(function (job) {
     <!-- Role -->
     <div class="tags">
    
-    <span>${job.role}
-    </span>
+    <span onClick="tagHunt(this)">${job.role}</span>
       
 
       <!-- Level -->
-      <span>${job.level}</span>
+      <span onClick="tagHunt(this)">${job.level}</span>
 
       <!-- Languages -->
      
-      <span>${job.languages[0]}</span>
-      ${job.languages.length > 1 ? `<span>${job.languages[1]}</span>` : ""}
-      ${job.languages.length > 2 ? `<span>${job.languages[2]}</span>` : ""}
-      ${job.tools.length > 0 ? `<span>${job.tools[0]}</span>` : ""}
-      ${job.tools.length > 1 ? `<span>${job.tools[1]}</span>` : ""}
-      ${job.tools.length > 2 ? `<span>${job.tools[2]}</span>` : ""}
+      <span class= "testing" onClick="tagHunt(this)">${job.languages[0]}</span>
+      ${
+        job.languages.length > 1
+          ? `<span onClick="tagHunt(this)">${job.languages[1]}</span>`
+          : ""
+      }
+      ${
+        job.languages.length > 2
+          ? `<span onClick="tagHunt(this)">${job.languages[2]}</span>`
+          : ""
+      }
+      ${
+        job.tools.length > 0
+          ? `<span onClick="tagHunt(this)">${job.tools[0]}</span>`
+          : ""
+      }
+      ${
+        job.tools.length > 1
+          ? `<span onClick="tagHunt(this)">${job.tools[1]}</span>`
+          : ""
+      }
+      ${
+        job.tools.length > 2
+          ? `<span onClick="tagHunt(this)">${job.tools[2]}</span>`
+          : ""
+      }
       
     </div>
 
@@ -206,6 +227,8 @@ data.forEach(function (job) {
 
 console.log(data[9].languages.join(","));
 
-{
-  /* <span>${job.languages.join(" ")}</span> */
-}
+const tagHunt = function (value) {
+  console.log(value.innerHTML);
+  let html = `<span>${value.innerHTML}<button>X</button></span>`;
+  filters.insertAdjacentHTML("afterend", html);
+};
