@@ -5,8 +5,125 @@ const filterBox = document.querySelector(".filter-section");
 const filterTags = document.querySelectorAll(".filter-tags");
 const clearBtn = document.querySelector(".clear-filters");
 
+<<<<<<< HEAD
 data.forEach(function (job) {
   let html = `
+=======
+let currentFilters = [];
+
+const clearPage = function () {
+  document.querySelectorAll(".job-listing").forEach((item) => {
+    item.remove();
+  });
+};
+
+//Language filters list
+let languageList = [];
+for (const [key, value] of Object.entries(data)) {
+  value.languages.forEach(function (language) {
+    languageList.push(language);
+  });
+}
+
+const languageFilters = [...new Set(languageList)];
+
+//tool filters list
+let toolsList = [];
+for (const [key, value] of Object.entries(data)) {
+  value.tools.forEach(function (tool) {
+    toolsList.push(tool);
+  });
+}
+
+const toolsFilters = [...new Set(toolsList)];
+
+//role filters list
+let roleList = [];
+for (const [key, value] of Object.entries(data)) {
+  roleList.push(value.role);
+}
+
+const roleFilters = [...new Set(roleList)];
+
+//level filters list
+let levelList = [];
+for (const [key, value] of Object.entries(data)) {
+  levelList.push(value.level);
+}
+
+const levelFilters = [...new Set(levelList)];
+
+let currentJobs;
+const renderData = function () {
+  //Clear site of every previous content
+  clearPage();
+  currentJobs = data;
+
+  //FILTER PROCESS
+
+  const currentFiltersTags = (list, filterList) => {
+    return filterList.filter((tag) =>
+      list.some((filter) => tag.includes(filter))
+    );
+  };
+
+  //LANGUAGE FILTER
+  let currentLanguageFilters = [];
+  currentLanguageFilters = currentFiltersTags(currentFilters, languageFilters);
+
+  const filterByLanguage = (list, filters) => {
+    return list.filter((person) =>
+      filters.every((filter) => person.languages.includes(filter))
+    );
+  };
+
+  currentLanguageFilters.length > 0
+    ? (currentJobs = filterByLanguage(data, currentLanguageFilters))
+    : currentJobs;
+
+  //TOOL FILTER
+  const currentToolTags = currentFiltersTags(currentFilters, toolsFilters);
+  console.log(currentToolTags);
+
+  const filterByTools = (list, filters) => {
+    return list.filter((person) =>
+      filters.every((filter) => person.tools.includes(filter))
+    );
+  };
+
+  currentToolTags.length > 0
+    ? (currentJobs = filterByTools(currentJobs, currentToolTags))
+    : currentJobs;
+
+  //ROLE FILTER
+  const filterByRole = (list, filters) => {
+    return list.filter((person) =>
+      filters.every((filter) => person.role.includes(filter))
+    );
+  };
+
+  const currentRoleFilters = currentFiltersTags(currentFilters, roleFilters);
+
+  currentRoleFilters.length > 0
+    ? (currentJobs = filterByRole(currentJobs, currentRoleFilters))
+    : currentJobs;
+
+  //  LEVEL FILTER
+  const filterByLevel = (list, filters) => {
+    return list.filter((person) =>
+      filters.every((filter) => person.level.includes(filter))
+    );
+  };
+
+  const currentLevelFilters = currentFiltersTags(currentFilters, levelFilters);
+
+  currentLevelFilters.length > 0
+    ? (currentJobs = filterByLevel(currentJobs, currentLevelFilters))
+    : currentJobs;
+  ///////////////////////////////////////
+  currentJobs.forEach(function (job) {
+    let html = `
+>>>>>>> filter
     <div class="job-listing">
     <div class="job-info">
       <div class="company-img">
@@ -69,12 +186,12 @@ data.forEach(function (job) {
 
   </div>`;
 
-  container.insertAdjacentHTML("beforeend", html);
-});
+    container.insertAdjacentHTML("beforeend", html);
+  });
+};
 
-console.log(data[9].languages.join(","));
+renderData();
 
-let currentFilters = [];
 const tagHunt = function (value) {
   if (currentFilters.includes(value.innerHTML)) {
     return;
@@ -83,6 +200,7 @@ const tagHunt = function (value) {
     currentFilters.length > 0 ? clearBtn.classList.remove("hidden") : "";
     let html = `<span class=${value.innerHTML}>${value.innerHTML}<button class=${value.innerHTML} onClick="deleteTag(this)">X</button></span>`;
     filters.insertAdjacentHTML("afterend", html);
+    renderData();
   }
 };
 
@@ -91,6 +209,7 @@ const deleteTag = function (classID) {
   filterBox.querySelector(`.${classID.className}`).remove();
   currentFilters.splice(deletedItem, 1);
   currentFilters.length === 0 ? clearBtn.classList.add("hidden") : "";
+  renderData();
 };
 
 const clearAll = function () {
@@ -99,4 +218,44 @@ const clearAll = function () {
   });
   currentFilters = [];
   clearBtn.classList.add("hidden");
+  renderData();
 };
+
+///////////////////////////////////////
+// let filteredArray = [];
+// let filterTag = ["Javascript", "HTML", "Frontend"];
+// let filterTag2 = ["JS", "CSS", "Backend"];
+// console.log(filterTag.includes(...filterTag2));
+// const [data1, data2, data3, data4, data5, data6, data7, data8, data9, data10] =
+//   data;
+
+// data.forEach(function (company) {
+//   for (const [key, value] of Object.entries(company)) {
+//     filteredArray =
+//   }
+// });
+
+// filteredArray = data.filter(function (company) {
+//   for (const [key, value] of Object.entries(company)) {
+//     filterTag.includes(value);
+//   }
+// });
+
+// data.filter(function (company) {
+//   for (const [key, value] of Object.entries(company)) {
+//     filterTag.includes(value);
+//   }
+//   console.log(company);
+// });
+
+// console.log(filterTag.includes("HTML"));
+
+// const filteredArray = data.filter(
+//   (company) =>
+//     // console.log(company.role);
+//     // filterTag.includes(company.role);
+//     filterTag.includes(company.role) && filterTag.includes(...company.languages)
+// filterTag.includes(...company.tools)
+// );
+// console.log(filteredArray);
+// console.log(filterTag.includes(data[0].role));
