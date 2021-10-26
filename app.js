@@ -3,6 +3,7 @@ const container = document.querySelector(".job-container");
 // import data from ".data.json";
 const filters = document.querySelector(".filter-items");
 const filterBox = document.querySelector(".filter-section");
+const filterTags = document.querySelectorAll(".filter-tags");
 
 const data = [
   {
@@ -242,4 +243,12 @@ const deleteTag = function (classID) {
   const deletedItem = currentFilters.indexOf(`${classID.className}`);
   filterBox.querySelector(`.${classID.className}`).remove();
   currentFilters.splice(deletedItem, 1);
+};
+
+const clearAll = function () {
+  currentFilters.forEach(function (filter) {
+    filterBox.querySelector(`.${filter}`).remove();
+    const deletedIndex = currentFilters.indexOf(`${filter}`);
+  });
+  currentFilters = [];
 };
