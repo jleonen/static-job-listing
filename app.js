@@ -5,10 +5,6 @@ const filterBox = document.querySelector(".filter-section");
 const filterTags = document.querySelectorAll(".filter-tags");
 const clearBtn = document.querySelector(".clear-filters");
 
-<<<<<<< HEAD
-data.forEach(function (job) {
-  let html = `
-=======
 let currentFilters = [];
 
 const clearPage = function () {
@@ -83,7 +79,6 @@ const renderData = function () {
 
   //TOOL FILTER
   const currentToolTags = currentFiltersTags(currentFilters, toolsFilters);
-  console.log(currentToolTags);
 
   const filterByTools = (list, filters) => {
     return list.filter((person) =>
@@ -123,7 +118,6 @@ const renderData = function () {
   ///////////////////////////////////////
   currentJobs.forEach(function (job) {
     let html = `
->>>>>>> filter
     <div class="job-listing">
     <div class="job-info">
       <div class="company-img">
