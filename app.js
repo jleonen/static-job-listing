@@ -1,6 +1,5 @@
 "use strict";
 const container = document.querySelector(".job-container");
-// import data from ".data.json";
 const filters = document.querySelector(".filter-items");
 const filterBox = document.querySelector(".filter-section");
 const filterTags = document.querySelectorAll(".filter-tags");
@@ -14,7 +13,7 @@ const clearPage = function () {
   });
 };
 
-//Language filters
+//Language filters list
 let languageList = [];
 for (const [key, value] of Object.entries(data)) {
   value.languages.forEach(function (language) {
@@ -23,10 +22,8 @@ for (const [key, value] of Object.entries(data)) {
 }
 
 const languageFilters = [...new Set(languageList)];
-console.log(languageFilters);
-const languageFilterTest = [...languageFilters];
 
-//tool filters
+//tool filters list
 let toolsList = [];
 for (const [key, value] of Object.entries(data)) {
   value.tools.forEach(function (tool) {
@@ -35,64 +32,47 @@ for (const [key, value] of Object.entries(data)) {
 }
 
 const toolsFilters = [...new Set(toolsList)];
-console.log(toolsFilters);
 
-//role filters
+//role filters list
 let roleList = [];
 for (const [key, value] of Object.entries(data)) {
   roleList.push(value.role);
 }
 
 const roleFilters = [...new Set(roleList)];
-console.log(roleFilters);
 
-//level filters
+//level filters list
 let levelList = [];
 for (const [key, value] of Object.entries(data)) {
   levelList.push(value.level);
 }
 
 const levelFilters = [...new Set(levelList)];
-console.log(levelFilters);
-
-console.log(currentFilters.includes("HTML"));
 
 let currentJobs;
 const renderData = function () {
+  //Clear site of every previous content
   clearPage();
   currentJobs = data;
-  //////////////////filters/////////
-  // if (currentFilters.includes(...languageFilters)) {
-  //   const currentLanguage = currentFilters.filter((language) =>
-  //     language.includes(...["HTML", "CSS"])
-  //   );
-  //   console.log(currentLanguage);
-  //   currentJobs = data.filter((languageList) => {
-  //     languageList.languages.includes(currentLanguage);
-  //   });
-  // } else {
-  //   currentJobs;
-  // }
-  // console.log(currentJobs);
-  // const filters = ["HTML", "JavaScript"];
-  let currentLanguageFilters = [];
+
+  //FILTER PROCESS
+
   const currentFiltersTags = (list, filterList) => {
     return filterList.filter((tag) =>
       list.some((filter) => tag.includes(filter))
     );
   };
 
-  currentLanguageFilters = currentFiltersTags(currentFilters, languageFilters);
-  console.log(currentLanguageFilters);
-
   //LANGUAGE FILTER
+  let currentLanguageFilters = [];
+  currentLanguageFilters = currentFiltersTags(currentFilters, languageFilters);
+
   const filterByLanguage = (list, filters) => {
     return list.filter((person) =>
       filters.every((filter) => person.languages.includes(filter))
     );
   };
 
-  // console.log( filterByLanguage(data, ['JavaScript'] ) )
   currentLanguageFilters.length > 0
     ? (currentJobs = filterByLanguage(data, currentLanguageFilters))
     : currentJobs;
@@ -102,9 +82,8 @@ const renderData = function () {
   console.log(currentToolTags);
 
   const filterByTools = (list, filters) => {
-    return list.filter(
-      (person) => filters.every((filter) => person.tools.includes(filter))
-      // filters.every((filter) => person.includes(filter))
+    return list.filter((person) =>
+      filters.every((filter) => person.tools.includes(filter))
     );
   };
 
@@ -114,9 +93,8 @@ const renderData = function () {
 
   //ROLE FILTER
   const filterByRole = (list, filters) => {
-    return list.filter(
-      (person) => filters.every((filter) => person.role.includes(filter))
-      // filters.every((filter) => person.includes(filter))
+    return list.filter((person) =>
+      filters.every((filter) => person.role.includes(filter))
     );
   };
 
@@ -128,20 +106,18 @@ const renderData = function () {
 
   //  LEVEL FILTER
   const filterByLevel = (list, filters) => {
-    return list.filter(
-      (person) => filters.every((filter) => person.level.includes(filter))
-      // filters.every((filter) => person.includes(filter))
+    return list.filter((person) =>
+      filters.every((filter) => person.level.includes(filter))
     );
   };
 
   const currentLevelFilters = currentFiltersTags(currentFilters, levelFilters);
-  console.log(currentLevelFilters);
+
   currentLevelFilters.length > 0
     ? (currentJobs = filterByLevel(currentJobs, currentLevelFilters))
     : currentJobs;
   ///////////////////////////////////////
   currentJobs.forEach(function (job) {
-    console.log(job);
     let html = `
     <div class="job-listing">
     <div class="job-info">
@@ -211,10 +187,7 @@ const renderData = function () {
 
 renderData();
 
-console.log(data[9].languages.join(","));
-
 const tagHunt = function (value) {
-  // console.log(value.innerHTML);
   if (currentFilters.includes(value.innerHTML)) {
     return;
   } else {
@@ -237,7 +210,6 @@ const deleteTag = function (classID) {
 const clearAll = function () {
   currentFilters.forEach(function (filter) {
     filterBox.querySelector(`.${filter}`).remove();
-    // const deletedIndex = currentFilters.indexOf(`${filter}`);
   });
   currentFilters = [];
   clearBtn.classList.add("hidden");
@@ -246,11 +218,11 @@ const clearAll = function () {
 
 ///////////////////////////////////////
 // let filteredArray = [];
-let filterTag = ["Javascript", "HTML", "Frontend"];
-let filterTag2 = ["JS", "CSS", "Backend"];
-console.log(filterTag.includes(...filterTag2));
-const [data1, data2, data3, data4, data5, data6, data7, data8, data9, data10] =
-  data;
+// let filterTag = ["Javascript", "HTML", "Frontend"];
+// let filterTag2 = ["JS", "CSS", "Backend"];
+// console.log(filterTag.includes(...filterTag2));
+// const [data1, data2, data3, data4, data5, data6, data7, data8, data9, data10] =
+//   data;
 
 // data.forEach(function (company) {
 //   for (const [key, value] of Object.entries(company)) {
@@ -271,14 +243,14 @@ const [data1, data2, data3, data4, data5, data6, data7, data8, data9, data10] =
 //   console.log(company);
 // });
 
-console.log(filterTag.includes("HTML"));
+// console.log(filterTag.includes("HTML"));
 
-const filteredArray = data.filter(
-  (company) =>
-    // console.log(company.role);
-    // filterTag.includes(company.role);
-    filterTag.includes(company.role) && filterTag.includes(...company.languages)
-  // filterTag.includes(...company.tools)
-);
-console.log(filteredArray);
-console.log(filterTag.includes(data[0].role));
+// const filteredArray = data.filter(
+//   (company) =>
+//     // console.log(company.role);
+//     // filterTag.includes(company.role);
+//     filterTag.includes(company.role) && filterTag.includes(...company.languages)
+// filterTag.includes(...company.tools)
+// );
+// console.log(filteredArray);
+// console.log(filterTag.includes(data[0].role));
