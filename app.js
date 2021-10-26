@@ -6,7 +6,13 @@ const filterBox = document.querySelector(".filter-section");
 const filterTags = document.querySelectorAll(".filter-tags");
 const clearBtn = document.querySelector(".clear-filters");
 
-let currentFilters = ["Frontend", "CSS", "Javascript"];
+let currentFilters = [];
+
+const clearPage = function () {
+  document.querySelectorAll(".job-listing").forEach((item) => {
+    item.remove();
+  });
+};
 
 //Language filters
 let languageList = [];
@@ -53,6 +59,7 @@ console.log(currentFilters.includes("HTML"));
 
 let currentJobs;
 const renderData = function () {
+  clearPage();
   currentJobs = data;
   //////////////////filters/////////
   // if (currentFilters.includes(...languageFilters)) {
@@ -117,6 +124,20 @@ const renderData = function () {
 
   currentRoleFilters.length > 0
     ? (currentJobs = filterByRole(currentJobs, currentRoleFilters))
+    : currentJobs;
+
+  //  LEVEL FILTER
+  const filterByLevel = (list, filters) => {
+    return list.filter(
+      (person) => filters.every((filter) => person.level.includes(filter))
+      // filters.every((filter) => person.includes(filter))
+    );
+  };
+
+  const currentLevelFilters = currentFiltersTags(currentFilters, levelFilters);
+  console.log(currentLevelFilters);
+  currentLevelFilters.length > 0
+    ? (currentJobs = filterByLevel(currentJobs, currentLevelFilters))
     : currentJobs;
   ///////////////////////////////////////
   currentJobs.forEach(function (job) {
@@ -201,6 +222,7 @@ const tagHunt = function (value) {
     currentFilters.length > 0 ? clearBtn.classList.remove("hidden") : "";
     let html = `<span class=${value.innerHTML}>${value.innerHTML}<button class=${value.innerHTML} onClick="deleteTag(this)">X</button></span>`;
     filters.insertAdjacentHTML("afterend", html);
+    renderData();
   }
 };
 
@@ -209,6 +231,7 @@ const deleteTag = function (classID) {
   filterBox.querySelector(`.${classID.className}`).remove();
   currentFilters.splice(deletedItem, 1);
   currentFilters.length === 0 ? clearBtn.classList.add("hidden") : "";
+  renderData();
 };
 
 const clearAll = function () {
@@ -218,6 +241,7 @@ const clearAll = function () {
   });
   currentFilters = [];
   clearBtn.classList.add("hidden");
+  renderData();
 };
 
 ///////////////////////////////////////
