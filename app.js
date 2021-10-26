@@ -1,6 +1,5 @@
 "use strict";
 const container = document.querySelector(".job-container");
-
 const filters = document.querySelector(".filter-items");
 const filterBox = document.querySelector(".filter-section");
 const filterTags = document.querySelectorAll(".filter-tags");
