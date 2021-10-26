@@ -229,6 +229,10 @@ console.log(data[9].languages.join(","));
 
 const tagHunt = function (value) {
   console.log(value.innerHTML);
-  let html = `<span>${value.innerHTML}<button>X</button></span>`;
+  let html = `<span class=${value.innerHTML}>${value.innerHTML}<button class=${value.innerHTML} onClick="deleteTag(this)">X</button></span>`;
   filters.insertAdjacentHTML("afterend", html);
+};
+
+const deleteTag = function (classID) {
+  filterBox.querySelector(`.${classID.className}`).remove();
 };
