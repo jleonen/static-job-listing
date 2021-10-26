@@ -4,6 +4,7 @@ const container = document.querySelector(".job-container");
 const filters = document.querySelector(".filter-items");
 const filterBox = document.querySelector(".filter-section");
 const filterTags = document.querySelectorAll(".filter-tags");
+const clearBtn = document.querySelector(".clear-filters");
 
 const data = [
   {
@@ -229,11 +230,12 @@ console.log(data[9].languages.join(","));
 
 let currentFilters = [];
 const tagHunt = function (value) {
-  console.log(value.innerHTML);
+  // console.log(value.innerHTML);
   if (currentFilters.includes(value.innerHTML)) {
     return;
   } else {
     currentFilters.push(value.innerHTML);
+    currentFilters.length > 0 ? clearBtn.classList.remove("hidden") : "";
     let html = `<span class=${value.innerHTML}>${value.innerHTML}<button class=${value.innerHTML} onClick="deleteTag(this)">X</button></span>`;
     filters.insertAdjacentHTML("afterend", html);
   }
@@ -243,12 +245,14 @@ const deleteTag = function (classID) {
   const deletedItem = currentFilters.indexOf(`${classID.className}`);
   filterBox.querySelector(`.${classID.className}`).remove();
   currentFilters.splice(deletedItem, 1);
+  currentFilters.length === 0 ? clearBtn.classList.add("hidden") : "";
 };
 
 const clearAll = function () {
   currentFilters.forEach(function (filter) {
     filterBox.querySelector(`.${filter}`).remove();
-    const deletedIndex = currentFilters.indexOf(`${filter}`);
+    // const deletedIndex = currentFilters.indexOf(`${filter}`);
   });
   currentFilters = [];
+  clearBtn.classList.add("hidden");
 };
