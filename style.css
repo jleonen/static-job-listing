@@ -97,5 +97,15 @@ body {
 .filter-section {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.562);
   display: flex;
+  justify-content: space-between;
+}
+
+.filter-tags {
+  display: flex;
   gap: 10px;
+}
+
+.clear-filters {
+  border: none;
+  color: hsl(180, 29%, 50%);
 }

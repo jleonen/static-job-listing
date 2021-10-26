@@ -157,7 +157,6 @@ const data = [
   },
 ];
 
-const [language1] = data[9].languages;
 data.forEach(function (job) {
   let html = `
     <div class="job-listing">
@@ -227,12 +226,20 @@ data.forEach(function (job) {
 
 console.log(data[9].languages.join(","));
 
+let currentFilters = [];
 const tagHunt = function (value) {
   console.log(value.innerHTML);
-  let html = `<span class=${value.innerHTML}>${value.innerHTML}<button class=${value.innerHTML} onClick="deleteTag(this)">X</button></span>`;
-  filters.insertAdjacentHTML("afterend", html);
+  if (currentFilters.includes(value.innerHTML)) {
+    return;
+  } else {
+    currentFilters.push(value.innerHTML);
+    let html = `<span class=${value.innerHTML}>${value.innerHTML}<button class=${value.innerHTML} onClick="deleteTag(this)">X</button></span>`;
+    filters.insertAdjacentHTML("afterend", html);
+  }
 };
 
 const deleteTag = function (classID) {
+  const deletedItem = currentFilters.indexOf(`${classID.className}`);
   filterBox.querySelector(`.${classID.className}`).remove();
+  currentFilters.splice(deletedItem, 1);
 };
