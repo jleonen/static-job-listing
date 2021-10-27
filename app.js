@@ -5,51 +5,50 @@ const filterBox = document.querySelector(".filter-section");
 const filterTags = document.querySelectorAll(".filter-tags");
 const clearBtn = document.querySelector(".clear-filters");
 
-let currentFilters = [];
-
+//function for clearing the whole job listing
 const clearPage = function () {
   document.querySelectorAll(".job-listing").forEach((item) => {
     item.remove();
   });
 };
 
-//Language filters list
 let languageList = [];
+
+let toolsList = [];
+
+let roleList = [];
+
+let levelList = [];
 for (const [key, value] of Object.entries(data)) {
   value.languages.forEach(function (language) {
     languageList.push(language);
   });
-}
 
-const languageFilters = [...new Set(languageList)];
-
-//tool filters list
-let toolsList = [];
-for (const [key, value] of Object.entries(data)) {
   value.tools.forEach(function (tool) {
     toolsList.push(tool);
   });
-}
 
-const toolsFilters = [...new Set(toolsList)];
-
-//role filters list
-let roleList = [];
-for (const [key, value] of Object.entries(data)) {
   roleList.push(value.role);
-}
 
-const roleFilters = [...new Set(roleList)];
-
-//level filters list
-let levelList = [];
-for (const [key, value] of Object.entries(data)) {
   levelList.push(value.level);
 }
 
+//Language tags
+const languageFilters = [...new Set(languageList)];
+
+//tools tags
+const toolsFilters = [...new Set(toolsList)];
+
+//role tags
+const roleFilters = [...new Set(roleList)];
+
+//level tags
 const levelFilters = [...new Set(levelList)];
 
 let currentJobs;
+let currentFilters = ["HTML"];
+
+//RENDER METHOD
 const renderData = function () {
   //Clear site of every previous content
   clearPage();
@@ -57,66 +56,95 @@ const renderData = function () {
 
   //FILTER PROCESS
 
-  const currentFiltersTags = (list, filterList) => {
-    return filterList.filter((tag) =>
-      list.some((filter) => tag.includes(filter))
+  const currentFiltersTags = (currentTags, filterCategory) => {
+    return filterCategory.filter((tag) =>
+      currentTags.some((filter) => tag.includes(filter))
     );
   };
+
+  ////////////////
+  // currentJobs = currentJobs.forEach(function (item) {
+  //   console.log(item);
+  //   currentFiltersTags(item.languages, currentFilters);
+
+  //   currentFiltersTags(item.tools, currentFilters);
+  //   currentFiltersTags(item.role, currentFilters);
+  //   currentFiltersTags(item.level, currentFilters);
+  // });
+  // console.log(currentJobs);
+
+  let array2;
+  const filterMethod = function (array) {
+    array.forEach(function (item) {
+      array2 = currentFiltersTags(item.languages, currentFilters);
+      // currentFiltersTags(item.tools, currentFilters);
+      // currentFiltersTags(item.role, currentFilters);
+      // currentFiltersTags(item.level, currentFilters);
+    });
+    return array2;
+  };
+
+  currentJobs = filterMethod(currentJobs);
+  console.log(currentJobs);
+
+  ////////////////
 
   //LANGUAGE FILTER
-  let currentLanguageFilters = [];
-  currentLanguageFilters = currentFiltersTags(currentFilters, languageFilters);
 
-  const filterByLanguage = (list, filters) => {
-    return list.filter((person) =>
-      filters.every((filter) => person.languages.includes(filter))
-    );
-  };
+  // const currentLanguageFilters = currentFiltersTags(
+  //   currentFilters,
+  //   languageFilters
+  // );
 
-  currentLanguageFilters.length > 0
-    ? (currentJobs = filterByLanguage(data, currentLanguageFilters))
-    : currentJobs;
+  // const filterByLanguage = (list, filters) => {
+  //   return list.filter((person) =>
+  //     filters.every((filter) => person.languages.includes(filter))
+  //   );
+  // };
 
-  //TOOL FILTER
-  const currentToolTags = currentFiltersTags(currentFilters, toolsFilters);
+  // currentLanguageFilters.length > 0 &&
+  //   (currentJobs = filterByLanguage(data, currentLanguageFilters));
 
-  const filterByTools = (list, filters) => {
-    return list.filter((person) =>
-      filters.every((filter) => person.tools.includes(filter))
-    );
-  };
+  // //TOOL FILTER
+  // const currentToolTags = currentFiltersTags(currentFilters, toolsFilters);
 
-  currentToolTags.length > 0
-    ? (currentJobs = filterByTools(currentJobs, currentToolTags))
-    : currentJobs;
+  // const filterByTools = (list, filters) => {
+  //   return list.filter((person) =>
+  //     filters.every((filter) => person.tools.includes(filter))
+  //   );
+  // };
 
-  //ROLE FILTER
-  const filterByRole = (list, filters) => {
-    return list.filter((person) =>
-      filters.every((filter) => person.role.includes(filter))
-    );
-  };
+  // currentToolTags.length > 0 &&
+  //   (currentJobs = filterByTools(currentJobs, currentToolTags));
 
-  const currentRoleFilters = currentFiltersTags(currentFilters, roleFilters);
+  // //ROLE FILTER
+  // const filterByRole = (list, filters) => {
+  //   return list.filter((person) =>
+  //     filters.every((filter) => person.role.includes(filter))
+  //   );
+  // };
 
-  currentRoleFilters.length > 0
-    ? (currentJobs = filterByRole(currentJobs, currentRoleFilters))
-    : currentJobs;
+  // const currentRoleFilters = currentFiltersTags(currentFilters, roleFilters);
 
-  //  LEVEL FILTER
-  const filterByLevel = (list, filters) => {
-    return list.filter((person) =>
-      filters.every((filter) => person.level.includes(filter))
-    );
-  };
+  // currentRoleFilters.length > 0 &&
+  //   (currentJobs = filterByRole(currentJobs, currentRoleFilters));
 
-  const currentLevelFilters = currentFiltersTags(currentFilters, levelFilters);
+  // //  LEVEL FILTER
+  // const filterByLevel = (list, filters) => {
+  //   return list.filter((person) =>
+  //     filters.every((filter) => person.level.includes(filter))
+  //   );
+  // };
 
-  currentLevelFilters.length > 0
-    ? (currentJobs = filterByLevel(currentJobs, currentLevelFilters))
-    : currentJobs;
-  ///////////////////////////////////////
+  // const currentLevelFilters = currentFiltersTags(currentFilters, levelFilters);
+
+  // currentLevelFilters.length > 0 &&
+  //   (currentJobs = filterByLevel(currentJobs, currentLevelFilters));
+
+  //JOB LISTING CONTENT
   currentJobs.forEach(function (job) {
+    let [language1, language2, language3] = job.languages;
+    let [tool1, tool2, tool3] = job.tools;
     let html = `
     <div class="job-listing">
     <div class="job-info">
@@ -148,31 +176,33 @@ const renderData = function () {
       <span onClick="tagHunt(this)">${job.level}</span>
 
       <!-- Languages -->
+  
+      
      
-      <span class= "testing" onClick="tagHunt(this)">${job.languages[0]}</span>
+      <span onClick="tagHunt(this)">${language1}</span>
       ${
         job.languages.length > 1
-          ? `<span onClick="tagHunt(this)">${job.languages[1]}</span>`
+          ? `<span onClick="tagHunt(this)">${language2}</span>`
           : ""
       }
       ${
         job.languages.length > 2
-          ? `<span onClick="tagHunt(this)">${job.languages[2]}</span>`
+          ? `<span onClick="tagHunt(this)">${language3}</span>`
           : ""
       }
       ${
         job.tools.length > 0
-          ? `<span onClick="tagHunt(this)">${job.tools[0]}</span>`
+          ? `<span onClick="tagHunt(this)">${tool1}</span>`
           : ""
       }
       ${
         job.tools.length > 1
-          ? `<span onClick="tagHunt(this)">${job.tools[1]}</span>`
+          ? `<span onClick="tagHunt(this)">${tool2}</span>`
           : ""
       }
       ${
         job.tools.length > 2
-          ? `<span onClick="tagHunt(this)">${job.tools[2]}</span>`
+          ? `<span onClick="tagHunt(this)">${tool3}</span>`
           : ""
       }
       
@@ -184,28 +214,33 @@ const renderData = function () {
   });
 };
 
+//initialize function upon loading the page
 renderData();
 
-const tagHunt = function (value) {
-  if (currentFilters.includes(value.innerHTML)) {
+//Adding tag towards filter section and applying it with renderData function
+const tagHunt = function (tag) {
+  //if filter tag is clicked on but is already present in filter section
+  if (currentFilters.includes(tag.innerHTML)) {
     return;
   } else {
-    currentFilters.push(value.innerHTML);
-    currentFilters.length > 0 ? clearBtn.classList.remove("hidden") : "";
-    let html = `<span class=${value.innerHTML}>${value.innerHTML}<button class=${value.innerHTML} onClick="deleteTag(this)">X</button></span>`;
+    currentFilters.push(tag.innerHTML);
+    //show filter section
+    currentFilters.length > 0 && clearBtn.classList.remove("hidden");
+    let html = `<span class=${tag.innerHTML}>${tag.innerHTML}<button class=${tag.innerHTML} onClick="deleteTag(this)">X</button></span>`;
     filters.insertAdjacentHTML("afterend", html);
     renderData();
   }
 };
 
-const deleteTag = function (classID) {
-  const deletedItem = currentFilters.indexOf(`${classID.className}`);
-  filterBox.querySelector(`.${classID.className}`).remove();
+const deleteTag = function (tagClass) {
+  const deletedItem = currentFilters.indexOf(`${tagClass.className}`);
+  filterBox.querySelector(`.${tagClass.className}`).remove();
   currentFilters.splice(deletedItem, 1);
   currentFilters.length === 0 ? clearBtn.classList.add("hidden") : "";
   renderData();
 };
 
+//clear all filters when clear button is clicked
 const clearAll = function () {
   currentFilters.forEach(function (filter) {
     filterBox.querySelector(`.${filter}`).remove();
