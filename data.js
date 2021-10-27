@@ -72,7 +72,7 @@ const data = [
     contract: "Full Time",
     location: "Worldwide",
     languages: ["JavaScript"],
-    tools: ["Ruby", "Sass"],
+    tools: ["ruby", "Sass"],
   },
   {
     id: 6,

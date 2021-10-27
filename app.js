@@ -46,7 +46,7 @@ const roleFilters = [...new Set(roleList)];
 const levelFilters = [...new Set(levelList)];
 
 let currentJobs;
-let currentFilters = ["HTML"];
+let currentFilters = [];
 
 //RENDER METHOD
 const renderData = function () {
@@ -73,73 +73,76 @@ const renderData = function () {
   // });
   // console.log(currentJobs);
 
-  let array2;
-  const filterMethod = function (array) {
-    array.forEach(function (item) {
-      array2 = currentFiltersTags(item.languages, currentFilters);
-      // currentFiltersTags(item.tools, currentFilters);
-      // currentFiltersTags(item.role, currentFilters);
-      // currentFiltersTags(item.level, currentFilters);
-    });
-    return array2;
-  };
+  // let array2;
+  // const filterMethod = function (array) {
+  //   array.forEach(function (item) {
+  //     array2 = currentFiltersTags(item.languages, currentFilters);
+  //     // currentFiltersTags(item.tools, currentFilters);
+  //     // currentFiltersTags(item.role, currentFilters);
+  //     // currentFiltersTags(item.level, currentFilters);
+  //   });
+  //   return array2;
+  // };
 
-  currentJobs = filterMethod(currentJobs);
-  console.log(currentJobs);
+  // currentJobs = filterMethod(currentJobs);
+  // console.log(currentJobs);
 
   ////////////////
 
   //LANGUAGE FILTER
 
-  // const currentLanguageFilters = currentFiltersTags(
-  //   currentFilters,
-  //   languageFilters
-  // );
+  const currentLanguageFilters = currentFiltersTags(
+    currentFilters,
+    languageFilters
+  );
 
-  // const filterByLanguage = (list, filters) => {
-  //   return list.filter((person) =>
-  //     filters.every((filter) => person.languages.includes(filter))
-  //   );
-  // };
+  console.log(currentLanguageFilters);
+  const filterByLanguage = (list, filters) => {
+    return list.filter((person) =>
+      filters.every((filter) => person.languages.includes(filter))
+    );
+  };
 
-  // currentLanguageFilters.length > 0 &&
-  //   (currentJobs = filterByLanguage(data, currentLanguageFilters));
+  currentLanguageFilters.length > 0 &&
+    // !currentLanguageFilters.includes("Ruby") &&
+    (currentJobs = filterByLanguage(data, currentLanguageFilters));
 
-  // //TOOL FILTER
-  // const currentToolTags = currentFiltersTags(currentFilters, toolsFilters);
+  //TOOL FILTER
+  const currentToolTags = currentFiltersTags(currentFilters, toolsFilters);
 
-  // const filterByTools = (list, filters) => {
-  //   return list.filter((person) =>
-  //     filters.every((filter) => person.tools.includes(filter))
-  //   );
-  // };
+  const filterByTools = (list, filters) => {
+    return list.filter((person) =>
+      filters.every((filter) => person.tools.includes(filter))
+    );
+  };
 
-  // currentToolTags.length > 0 &&
-  //   (currentJobs = filterByTools(currentJobs, currentToolTags));
+  currentToolTags.length > 0 &&
+    // !currentToolTags.includes("RubyTool") &&
+    (currentJobs = filterByTools(currentJobs, currentToolTags));
 
-  // //ROLE FILTER
-  // const filterByRole = (list, filters) => {
-  //   return list.filter((person) =>
-  //     filters.every((filter) => person.role.includes(filter))
-  //   );
-  // };
+  //ROLE FILTER
+  const filterByRole = (list, filters) => {
+    return list.filter((person) =>
+      filters.every((filter) => person.role.includes(filter))
+    );
+  };
 
-  // const currentRoleFilters = currentFiltersTags(currentFilters, roleFilters);
+  const currentRoleFilters = currentFiltersTags(currentFilters, roleFilters);
 
-  // currentRoleFilters.length > 0 &&
-  //   (currentJobs = filterByRole(currentJobs, currentRoleFilters));
+  currentRoleFilters.length > 0 &&
+    (currentJobs = filterByRole(currentJobs, currentRoleFilters));
 
-  // //  LEVEL FILTER
-  // const filterByLevel = (list, filters) => {
-  //   return list.filter((person) =>
-  //     filters.every((filter) => person.level.includes(filter))
-  //   );
-  // };
+  //  LEVEL FILTER
+  const filterByLevel = (list, filters) => {
+    return list.filter((person) =>
+      filters.every((filter) => person.level.includes(filter))
+    );
+  };
 
-  // const currentLevelFilters = currentFiltersTags(currentFilters, levelFilters);
+  const currentLevelFilters = currentFiltersTags(currentFilters, levelFilters);
 
-  // currentLevelFilters.length > 0 &&
-  //   (currentJobs = filterByLevel(currentJobs, currentLevelFilters));
+  currentLevelFilters.length > 0 &&
+    (currentJobs = filterByLevel(currentJobs, currentLevelFilters));
 
   //JOB LISTING CONTENT
   currentJobs.forEach(function (job) {
