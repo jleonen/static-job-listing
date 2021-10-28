@@ -96,34 +96,31 @@ const renderData = function () {
     languageFilters
   );
 
-  console.log(currentLanguageFilters);
   const filterByLanguage = (list, filters) => {
-    return list.filter((person) =>
-      filters.every((filter) => person.languages.includes(filter))
+    return list.filter((job) =>
+      filters.every((filter) => job.languages.includes(filter))
     );
   };
 
   currentLanguageFilters.length > 0 &&
-    // !currentLanguageFilters.includes("Ruby") &&
     (currentJobs = filterByLanguage(data, currentLanguageFilters));
 
   //TOOL FILTER
   const currentToolTags = currentFiltersTags(currentFilters, toolsFilters);
 
   const filterByTools = (list, filters) => {
-    return list.filter((person) =>
-      filters.every((filter) => person.tools.includes(filter))
+    return list.filter((job) =>
+      filters.every((filter) => job.tools.includes(filter))
     );
   };
 
   currentToolTags.length > 0 &&
-    // !currentToolTags.includes("RubyTool") &&
     (currentJobs = filterByTools(currentJobs, currentToolTags));
 
   //ROLE FILTER
   const filterByRole = (list, filters) => {
-    return list.filter((person) =>
-      filters.every((filter) => person.role.includes(filter))
+    return list.filter((job) =>
+      filters.every((filter) => job.role.includes(filter))
     );
   };
 
@@ -134,8 +131,8 @@ const renderData = function () {
 
   //  LEVEL FILTER
   const filterByLevel = (list, filters) => {
-    return list.filter((person) =>
-      filters.every((filter) => person.level.includes(filter))
+    return list.filter((job) =>
+      filters.every((filter) => job.level.includes(filter))
     );
   };
 
@@ -221,6 +218,7 @@ const renderData = function () {
 renderData();
 
 //Adding tag towards filter section and applying it with renderData function
+
 const tagHunt = function (tag) {
   //if filter tag is clicked on but is already present in filter section
   if (currentFilters.includes(tag.innerHTML)) {
