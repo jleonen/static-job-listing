@@ -146,7 +146,7 @@ const renderData = function () {
     let [language1, language2, language3] = job.languages;
     let [tool1, tool2, tool3] = job.tools;
     let html = `
-    <div class="job-listing">
+    <div class="job-listing" onClick="highlight(this)">
     <div class="job-info">
       <div class="company-img">
         <img src="${job.logo}" alt="Logo" />
@@ -249,6 +249,10 @@ const clearAll = function () {
   currentFilters = [];
   clearBtn.classList.add("hidden");
   renderData();
+};
+
+const highlight = function (item) {
+  item.classList.toggle("selected");
 };
 
 ///////////////////////////////////////
