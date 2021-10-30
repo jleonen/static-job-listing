@@ -26,7 +26,6 @@ body {
   justify-content: flex-start;
   /* gap: 500px; */
   padding: 20px;
-  cursor: pointer;
 }
 
 .selected {
@@ -40,6 +39,7 @@ body {
 .job-info {
   display: flex;
   gap: 20px;
+  cursor: pointer;
 }
 
 .job-description span {
