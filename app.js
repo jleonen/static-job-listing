@@ -146,8 +146,8 @@ const renderData = function () {
     let [language1, language2, language3] = job.languages;
     let [tool1, tool2, tool3] = job.tools;
     let html = `
-    <div class="job-listing" onClick="highlight(this)">
-    <div class="job-info">
+    <div class="job-listing">
+    <div class="job-info" onClick="highlight(this)">
       <div class="company-img">
         <img src="${job.logo}" alt="Logo" />
       </div>
@@ -227,7 +227,7 @@ const tagHunt = function (tag) {
     currentFilters.push(tag.innerHTML);
     //show filter section
     currentFilters.length > 0 && clearBtn.classList.remove("hidden");
-    let html = `<span class=${tag.innerHTML}>${tag.innerHTML}<button class=${tag.innerHTML} onClick="deleteTag(this)">X</button></span>`;
+    let html = `<span class=${tag.innerHTML}>${tag.innerHTML}<button class=${tag.innerHTML} onClick="deleteTag(this)"><i class="fas fa-times fa-lg"></i></button></span>`;
     filters.insertAdjacentHTML("afterend", html);
     renderData();
   }
@@ -252,7 +252,7 @@ const clearAll = function () {
 };
 
 const highlight = function (item) {
-  item.classList.toggle("selected");
+  item.parentNode.classList.toggle("selected");
 };
 
 ///////////////////////////////////////
