@@ -5,7 +5,7 @@ body {
 }
 
 hr {
-  width: 0;
+  display: none;
 }
 
 .attribution {
@@ -209,8 +209,10 @@ hr {
   }
 
   .filter-tags {
+    display: grid;
     justify-items: right;
     row-gap: 50px;
+    column-gap: 90px;
   }
 
   .filter-tags span {
@@ -228,6 +230,7 @@ hr {
   }
 
   hr {
+    display: inline;
     border: 1px solid rgba(0, 0, 0, 0.479);
     width: 1200px;
   }
