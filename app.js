@@ -166,6 +166,7 @@ const renderData = function () {
         <!-- <span class="extra-info">  </span> -->
       </div>
     </div>
+    <hr>
     <!-- Role -->
     <div class="tags">
    

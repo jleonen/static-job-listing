@@ -4,6 +4,10 @@ body {
   font-family: "Spartan";
 }
 
+hr {
+  width: 0;
+}
+
 .attribution {
   font-size: 11px;
   text-align: center;
@@ -165,9 +169,14 @@ body {
     font-size: 50px;
   }
 
+  .header {
+    width: 1600px;
+  }
+
   .job-listing {
     flex-direction: column;
     gap: 40px;
+    box-shadow: 10px 15px 5px rgb(0 0 0 / 10%);
   }
 
   .job-info {
@@ -186,9 +195,40 @@ body {
   .tags {
     margin: 0px;
     margin-right: auto;
-    /* width: 400px; */
     gap: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .selected {
+    border-left: 15px solid hsl(180, 29%, 50%);
+  }
+
+  .clear-filters {
+    font-size: 50px;
+  }
+
+  .filter-tags {
+    justify-items: right;
+    row-gap: 50px;
+  }
+
+  .filter-tags span {
+    font-weight: 700;
+  }
+
+  .filter-tags span button {
+    font-size: 50px;
+    padding: 25px;
+  }
+
+  .filter-items {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  hr {
+    border: 1px solid rgba(0, 0, 0, 0.479);
+    width: 1200px;
   }
 }
