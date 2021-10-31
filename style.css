@@ -158,13 +158,57 @@ hr {
   }
 }
 
-@media (max-width: 750px) {
+@media (max-width: 900px) {
   body {
     font-size: 28px;
   }
+
+  .job-description span {
+    font-size: 20px;
+  }
+
+  .filter-tags span {
+    font-size: 30px;
+  }
+
+  .clear-filters {
+    font-size: 30px;
+  }
+
+  .filter-tags span button {
+    font-size: 20px;
+    padding: 10px;
+  }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 650px) {
+  /* body {
+    font-size: 40px;
+  } */
+
+  .job-listing {
+    gap: 60px;
+  }
+
+  .job-description span {
+    font-size: 38px;
+  }
+
+  .job-description p strong {
+    font-size: 40px;
+  }
+
+  .tags {
+    font-size: 38px;
+  }
+
+  .filter-tags span button {
+    font-size: 30px;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 460px) {
   body {
     font-size: 50px;
   }
@@ -192,12 +236,17 @@ hr {
     height: 150px;
   }
 
+  .job-description p strong {
+    font-size: 50px;
+  }
+
   .tags {
     margin: 0px;
     margin-right: auto;
     gap: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    font-size: 50px;
   }
 
   .selected {
@@ -217,6 +266,7 @@ hr {
 
   .filter-tags span {
     font-weight: 700;
+    font-size: 50px;
   }
 
   .filter-tags span button {
