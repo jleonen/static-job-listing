@@ -162,12 +162,25 @@ body {
 
 @media (max-width: 375px) {
   body {
-    font-size: 37px;
+    font-size: 50px;
   }
 
   .job-listing {
     flex-direction: column;
     gap: 40px;
+  }
+
+  .job-info {
+    flex-direction: column;
+  }
+
+  .job-description span {
+    font-size: 40px;
+  }
+
+  .company-img img {
+    width: 150px;
+    height: 150px;
   }
 
   .tags {
