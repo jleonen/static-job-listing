@@ -25,10 +25,10 @@ hr {
 
 .job-listing {
   display: flex;
-  /* justify-content: space-around; */
+
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.562);
   justify-content: flex-start;
-  /* gap: 500px; */
+
   padding: 20px;
 }
 
@@ -95,9 +95,6 @@ hr {
 }
 
 .job-container {
-  /* display: flex;
-  flex-direction: column;
-  gap: 15px; */
   display: grid;
   grid-template-rows: 1fr;
   width: 1300px;
@@ -182,10 +179,6 @@ hr {
 }
 
 @media (max-width: 650px) {
-  /* body {
-    font-size: 40px;
-  } */
-
   .job-listing {
     gap: 60px;
   }

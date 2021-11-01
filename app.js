@@ -62,33 +62,6 @@ const renderData = function () {
     );
   };
 
-  ////////////////
-  // currentJobs = currentJobs.forEach(function (item) {
-  //   console.log(item);
-  //   currentFiltersTags(item.languages, currentFilters);
-
-  //   currentFiltersTags(item.tools, currentFilters);
-  //   currentFiltersTags(item.role, currentFilters);
-  //   currentFiltersTags(item.level, currentFilters);
-  // });
-  // console.log(currentJobs);
-
-  // let array2;
-  // const filterMethod = function (array) {
-  //   array.forEach(function (item) {
-  //     array2 = currentFiltersTags(item.languages, currentFilters);
-  //     // currentFiltersTags(item.tools, currentFilters);
-  //     // currentFiltersTags(item.role, currentFilters);
-  //     // currentFiltersTags(item.level, currentFilters);
-  //   });
-  //   return array2;
-  // };
-
-  // currentJobs = filterMethod(currentJobs);
-  // console.log(currentJobs);
-
-  ////////////////
-
   //LANGUAGE FILTER
 
   const currentLanguageFilters = currentFiltersTags(
@@ -170,40 +143,40 @@ const renderData = function () {
     <!-- Role -->
     <div class="tags">
    
-    <span onClick="tagHunt(this)">${job.role}</span>
+    <span onClick=tagHunt(this)>${job.role}</span>
       
 
       <!-- Level -->
-      <span onClick="tagHunt(this)">${job.level}</span>
+      <span onClick=tagHunt(this)>${job.level}</span>
 
       <!-- Languages -->
   
       
      
-      <span onClick="tagHunt(this)">${language1}</span>
+      <span >${language1}</span>
       ${
         job.languages.length > 1
-          ? `<span onClick="tagHunt(this)">${language2}</span>`
+          ? `<span onClick=tagHunt(this)>${language2}</span>`
           : ""
       }
       ${
         job.languages.length > 2
-          ? `<span onClick="tagHunt(this)">${language3}</span>`
+          ? `<span onClick=tagHunt(this)>${language3}</span>`
           : ""
       }
       ${
         job.tools.length > 0
-          ? `<span onClick="tagHunt(this)">${tool1}</span>`
+          ? `<span onClick=tagHunt(this)>${tool1}</span>`
           : ""
       }
       ${
         job.tools.length > 1
-          ? `<span onClick="tagHunt(this)">${tool2}</span>`
+          ? `<span onClick=tagHunt(this)>${tool2}</span>`
           : ""
       }
       ${
         job.tools.length > 2
-          ? `<span onClick="tagHunt(this)">${tool3}</span>`
+          ? `<span onClick=tagHunt(this)>${tool3}</span>`
           : ""
       }
       
